@@ -1,2 +1,5 @@
 Added a Thread model
 Each thread now belongs to a category
+
+Added a Comment model
+Each comment now belongs to a thread
