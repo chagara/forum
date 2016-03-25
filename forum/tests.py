@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from .models import Category, Section, Thread
 
+
 # Create your tests here.
 class ModelsTest(TestCase):
 
@@ -22,7 +23,7 @@ class ModelsTest(TestCase):
 
     def test_each_category_belongs_to_a_section(self):
         section = Section.objects.create(name="Section")
-        category = Category.objects.create(name="Category", section=section)
+        Category.objects.create(name="Category", section=section)
         saved_category = Category.objects.get(name="Category")
         self.assertEquals(saved_category.section, section)
 
