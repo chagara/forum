@@ -9,7 +9,7 @@ class Section(models.Model):
 class Category(models.Model):
     name = models.CharField(default='Category', max_length=124)
     description = models.CharField(default='', max_length=124)
-    section = models.ForeignKey(Section, null=True)
+    section = models.ForeignKey(Section, default=None)
 
 
 class Thread(models.Model):
