@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Category, Section, Thread
+from .models import Category, Comment, Section, Thread
 
 
 # Create your tests here.
@@ -29,7 +29,8 @@ class ModelsTest(TestCase):
 
     def test_thread_model_has_correct_attributes(self):
         datetime_posted = timezone.now()
-        category = Category.objects.create()
+        section = Section.objects.create()
+        category = Category.objects.create(section=section)
         first_thread = Thread.objects.create(
             name="The first thread",
             datetime_posted=datetime_posted,
@@ -48,3 +49,15 @@ class ModelsTest(TestCase):
             category=category)
 
         self.assertEquals(thread.category, category)
+
+    def test_comment_model_has_correct_attributes(self):
+        comment = Comment.objects.create(
+            text="The first comment",
+            author="Someone",
+            datetime_posted=timezone.now())
+        saved_comment = Comment.objects.first()
+
+        self.assertEquals(comment.text, saved_comment.text)
+        self.assertEquals(comment.author, saved_comment.author)
+        self.assertEquals(
+            comment.datetime_posted, saved_comment.datetime_posted)
