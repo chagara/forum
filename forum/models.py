@@ -15,3 +15,4 @@ class Category(models.Model):
 class Thread(models.Model):
     name = models.CharField(default='Thread', max_length=248)
     datetime_posted = models.DateTimeField(auto_now=False, auto_now_add=False)
+    category = models.ForeignKey(Category, default=None)

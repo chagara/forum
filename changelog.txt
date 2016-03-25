@@ -1,1 +1,2 @@
 Added a Thread model
+Each thread now belongs to a category
