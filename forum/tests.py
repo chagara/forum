@@ -51,13 +51,33 @@ class ModelsTest(TestCase):
         self.assertEquals(thread.category, category)
 
     def test_comment_model_has_correct_attributes(self):
+        section = Section.objects.create()
+        category = Category.objects.create(section=section)
+        thread = Thread.objects.create(
+            datetime_posted=timezone.now(), category=category)
+
         comment = Comment.objects.create(
             text="The first comment",
             author="Someone",
-            datetime_posted=timezone.now())
+            datetime_posted=timezone.now(),
+            thread=thread)
         saved_comment = Comment.objects.first()
 
         self.assertEquals(comment.text, saved_comment.text)
         self.assertEquals(comment.author, saved_comment.author)
         self.assertEquals(
             comment.datetime_posted, saved_comment.datetime_posted)
+
+    def test_each_comment_belongs_to_a_thread(self):
+        section = Section.objects.create()
+        category = Category.objects.create(section=section)
+        thread = Thread.objects.create(
+            datetime_posted=timezone.now(),
+            category=category)
+        comment = Comment.objects.create(
+            text="Some text",
+            author="Someone",
+            datetime_posted=timezone.now(),
+            thread=thread)
+
+        self.assertEquals(comment.thread, thread)

@@ -23,3 +23,4 @@ class Comment(models.Model):
     text = models.TextField(default=None)
     author = models.CharField(default=None, max_length=24)
     datetime_posted = models.DateTimeField(default=timezone.now)
+    thread = models.ForeignKey(Thread, default=None)
