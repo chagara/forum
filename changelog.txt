@@ -3,3 +3,5 @@ Each thread now belongs to a category
 
 Added a Comment model
 Each comment now belongs to a thread
+
+Added a home view and a template
