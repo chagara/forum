@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 from .models import Category, Comment, Section, Thread
 
@@ -31,20 +32,21 @@ class ModelsTest(TestCase):
         self.assertEquals(datetime_posted, first_thread.datetime_posted)
 
     def test_comment_model_has_correct_attributes(self):
+        the_user = User('user1', 'user1@example.com', 'password1')
         datetime_posted = timezone.now()
         section = Section()
         category = Category(section=section)
         thread = Thread(
-            datetime_posted=datetime_posted, category=category)
-
+            datetime_posted=datetime_posted, category=category,
+            author=the_user)
         comment = Comment(
             text="The first comment",
-            author="Someone",
+            author=the_user,
             datetime_posted=datetime_posted,
             thread=thread)
 
         self.assertEquals(comment.text, "The first comment")
-        self.assertEquals(comment.author, "Someone")
+        self.assertEquals(comment.author, the_user)
         self.assertEquals(
             comment.datetime_posted, datetime_posted)
         self.assertEquals(comment.thread, thread)

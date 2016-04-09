@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -15,12 +16,13 @@ class Category(models.Model):
 
 class Thread(models.Model):
     name = models.CharField(default='Thread', max_length=248)
+    author = models.ForeignKey(User, default=None)
     datetime_posted = models.DateTimeField(auto_now=False, auto_now_add=False)
     category = models.ForeignKey(Category, default=None)
 
 
 class Comment(models.Model):
     text = models.TextField(default=None)
-    author = models.CharField(default=None, max_length=24)
+    author = models.ForeignKey(User, default=None)
     datetime_posted = models.DateTimeField(default=timezone.now)
     thread = models.ForeignKey(Thread, default=None)
