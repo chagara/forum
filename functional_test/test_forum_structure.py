@@ -3,6 +3,8 @@ from functional_test.base import FunctionalTest
 
 class ForumStructureTest(FunctionalTest):
 
+    fixtures = ['test_forum_structure']
+
     def test_forum_structure(self):
         # Goes to the home page
         self.browser.get(self.live_server_url)
