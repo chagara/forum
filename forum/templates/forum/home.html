@@ -9,7 +9,8 @@
 {% block content %}
     <h1>DjangoLearners</h1>
     <table id="sections" class="table-bordered">
-        <tr><td class="section">Section1</td></tr>
-        <tr><td class="section">Section2</td></tr>
+        {% for section in sections %}
+            <tr><td class="section">{{ section.name }}</td></tr>
+        {% endfor %}
     </table>
 {% endblock content %}
