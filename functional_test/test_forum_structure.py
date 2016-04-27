@@ -21,7 +21,7 @@ class ForumStructureTest(FunctionalTest):
         self.assertIn("Section2", sections_table.text)
 
         # Clicks Section1
-        sections = sections_table.browser.find_element_by_class_name("section")
+        sections = sections_table.find_elements_by_class_name("section")
         for section in sections:
             if section.text == "Section1":
                 section.click()
@@ -42,7 +42,7 @@ class ForumStructureTest(FunctionalTest):
         self.assertIn("Category2", categories_table.text)
 
         # Clicks Category1
-        categories = categories_table.browser.find_element_by_class_name(
+        categories = categories_table.find_elements_by_class_name(
             "category")
         for category in categories:
             if category.text == "Category1":
@@ -64,7 +64,7 @@ class ForumStructureTest(FunctionalTest):
         self.assertIn("Thread2", threads_table.text)
 
         # Clicks Thread1
-        threads = threads_table.browser.find_element_by_class_name(
+        threads = threads_table.find_elements_by_class_name(
             "Thread")
         for Thread in threads:
             if Thread.text == "Thread1":
