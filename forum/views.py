@@ -25,4 +25,7 @@ def category_view(request, category_id):
 
 
 def thread_view(request, thread_id):
-    return render(request, 'forum/thread.html')
+    context = {
+        "thread": get_object_or_404(Thread, pk=thread_id)
+    }
+    return render(request, 'forum/thread.html', context)

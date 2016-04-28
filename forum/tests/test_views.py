@@ -65,7 +65,7 @@ class CategoryViewTest(TestCase):
         self.assertEqual("Category1", response.context['category'].name)
 
     def test_invalid_category_id_raises_404(self):
-        response = self.client.get('/category/87ab3/')
+        response = self.client.get('/category/984357/')
         self.assertEqual(response.status_code, 404)
 
     def test_passes_threads_context_to_template(self):
@@ -86,3 +86,13 @@ class ThreadViewTest(TestCase):
         response = self.client.get('/thread/%d/' % (thread.id,))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'forum/thread.html')
+
+    def test_passes_thread_context_to_template(self):
+        thread = Thread.objects.get(name="Thread1")
+        response = self.client.get('/thread/%d/' % (thread.id,))
+        self.assertIn('thread', response.context)
+        self.assertEqual("Thread1", response.context['thread'].name)
+
+    def test_invalid_thread_id_raises_404(self):
+        response = self.client.get('/thread/2398743/')
+        self.assertEqual(response.status_code, 404)
