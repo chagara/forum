@@ -13,6 +13,7 @@ def section_view(request, section_id):
     context = {
         "section": section,
         "page_title": section.name,
+        "child_class": "category",
         "categories": Category.objects.filter(section__pk=section_id),
         "forum_children": Category.objects.filter(section__pk=section_id),
         "child_url": "forum:category_view"
