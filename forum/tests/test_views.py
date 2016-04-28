@@ -56,3 +56,13 @@ class CategoryViewTest(TestCase):
         response = self.client.get('/category/%d/' % (category.id,))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'forum/category.html')
+
+    def test_passes_category_context_to_template(self):
+        category = Category.objects.get(name="Category1")
+        response = self.client.get('/category/%d/' % (category.id,))
+        self.assertIn('category', response.context)
+        self.assertEqual("Category1", response.context['category'].name)
+
+    def test_invalid_category_id_raises_404(self):
+        response = self.client.get('/category/87ab3/')
+        self.assertEqual(response.status_code, 404)

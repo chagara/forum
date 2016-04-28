@@ -17,4 +17,7 @@ def section_view(request, section_id):
 
 
 def category_view(request, category_id):
-    return render(request, 'forum/category.html')
+    context = {
+        "category": get_object_or_404(Category, pk=category_id)
+    }
+    return render(request, 'forum/category.html', context)
