@@ -25,3 +25,13 @@ class SectionViewTest(TestCase):
         response = self.client.get('/section/%d/' % (section.id,))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'forum/section.html')
+
+    def test_passes_section_context_to_template(self):
+        section = Section.objects.create(name="Section1")
+        response = self.client.get('/section/%d/' % (section.id,))
+        self.assertIn('section', response.context)
+        self.assertEqual("Section1", response.context['section'].name)
+
+    def test_invalid_section_id_raises_404(self):
+        response = self.client.get('/section/87/')
+        self.assertEqual(response.status_code, 404)
