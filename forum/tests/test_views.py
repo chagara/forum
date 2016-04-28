@@ -23,11 +23,11 @@ class SectionViewTest(TestCase):
 
     fixtures = ['test_forum_structure']
 
-    def test_uses_section_template(self):
+    def test_uses_detail_template(self):
         section = Section.objects.first()
         response = self.client.get('/section/%d/' % (section.id,))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'forum/section.html')
+        self.assertTemplateUsed(response, 'forum/detail.html')
 
     def test_passes_section_context_to_template(self):
         section = Section.objects.get(name="Section1")

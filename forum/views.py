@@ -13,7 +13,7 @@ def section_view(request, section_id):
         "section": get_object_or_404(Section, pk=section_id),
         "categories": Category.objects.filter(section__pk=section_id)
     }
-    return render(request, 'forum/section.html', context)
+    return render(request, 'forum/detail.html', context)
 
 
 def category_view(request, category_id):
