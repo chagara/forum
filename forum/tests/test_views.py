@@ -75,3 +75,14 @@ class CategoryViewTest(TestCase):
 
         response_threads = response.context['threads']
         self.assertEqual(list(response_threads), list(threads))
+
+
+class ThreadViewTest(TestCase):
+
+    fixtures = ['test_forum_structure']
+
+    def test_uses_thread_template(self):
+        thread = Thread.objects.first()
+        response = self.client.get('/thread/%d/' % (thread.id,))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'forum/thread.html')

@@ -11,7 +11,7 @@
     <table id="threads" class="table-bordered">
         {% for thread in threads %}
             <tr><td class="thread">
-                <a href="">
+                <a href="{% url 'forum:thread_view' thread_id=thread.id %}">
                 {{ thread.name }}</a>
             </td></tr>
         {% endfor %}

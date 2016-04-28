@@ -22,3 +22,7 @@ def category_view(request, category_id):
         "threads": Thread.objects.filter(category__pk=category_id)
     }
     return render(request, 'forum/category.html', context)
+
+
+def thread_view(request, thread_id):
+    return render(request, 'forum/thread.html')
