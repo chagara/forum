@@ -29,6 +29,12 @@ class SectionViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'forum/detail.html')
 
+    def test_passes_page_title_to_context(self):
+        section = Section.objects.get(name="Section1")
+        response = self.client.get('/section/%d/' % (section.id,))
+        self.assertIn('page_title', response.context)
+        self.assertEqual(section.name, response.context['page_title'])
+
     def test_passes_section_context_to_template(self):
         section = Section.objects.get(name="Section1")
         response = self.client.get('/section/%d/' % (section.id,))
