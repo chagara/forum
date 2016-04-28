@@ -1,5 +1,5 @@
 from django.test import TestCase
-from forum.models import Section
+from forum.models import Section, Category
 
 
 class HomeViewTest(TestCase):
@@ -39,3 +39,9 @@ class SectionViewTest(TestCase):
         response = self.client.get('/section/87ab3/')
         self.assertEqual(response.status_code, 404)
 
+    def test_passes_categories_context_to_template(self):
+        categories = Category.objects.all()
+        response = self.client.get('/section/1/')
+
+        response_sections = response.context['categories']
+        self.assertEqual(list(response_sections), list(categories))

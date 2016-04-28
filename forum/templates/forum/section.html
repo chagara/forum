@@ -7,4 +7,12 @@
 
 {% block pagetitle %}{{ section.name }}{% endblock pagetitle %}
 {% block content %}
+    <table id="categories" class="table-bordered">
+        {% for category in categories %}
+            <tr><td class="category">
+                <a href="">
+                {{ category.name }}</a>
+            </td></tr>
+        {% endfor %}
+    </table>
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Section
+from .models import Section, Category
 
 
 def home(request):
@@ -9,6 +9,8 @@ def home(request):
 
 
 def section_view(request, section_id):
-    section = get_object_or_404(Section, pk=section_id)
-    context = {"section": section}
+    context = {
+        "section": get_object_or_404(Section, pk=section_id),
+        "categories": Category.objects.all()
+    }
     return render(request, 'forum/section.html', context)
