@@ -10,7 +10,7 @@
     <table id="forum_children" class="table-bordered">
         {% for forum_child in forum_children %}
             <tr><td class="category">
-                <a href="{% url 'forum:category_view' category_id=forum_child.id %}">
+                <a href="{% url child_url category_id=forum_child.id %}">
                 {{ forum_child.name }}</a>
             </td></tr>
         {% endfor %}

@@ -35,6 +35,12 @@ class SectionViewTest(TestCase):
         self.assertIn('page_title', response.context)
         self.assertEqual(section.name, response.context['page_title'])
 
+    def test_passes_child_url_to_context(self):
+        section = Section.objects.get(name="Section1")
+        response = self.client.get('/section/%d/' % (section.id,))
+        self.assertIn('child_url', response.context)
+        self.assertEqual('forum:category_view', response.context['child_url'])
+
     def test_passes_forum_children_to_context(self):
         section = Section.objects.get(name="Section1")
         categories = Category.objects.filter(section__pk=section.id)
