@@ -56,23 +56,9 @@ class SectionViewTest(TestCase):
         response_categories = response.context['forum_children']
         self.assertEqual(list(response_categories), list(categories))
 
-    def test_passes_section_context_to_template(self):
-        section = Section.objects.get(name="Section1")
-        response = self.client.get('/section/%d/' % (section.id,))
-        self.assertIn('section', response.context)
-        self.assertEqual("Section1", response.context['section'].name)
-
     def test_invalid_section_id_raises_404(self):
         response = self.client.get('/section/87ab3/')
         self.assertEqual(response.status_code, 404)
-
-    def test_passes_categories_context_to_template(self):
-        section = Section.objects.get(name="Section1")
-        categories = Category.objects.filter(section__pk=section.id)
-        response = self.client.get('/section/%d/' % (section.id))
-
-        response_categories = response.context['categories']
-        self.assertEqual(list(response_categories), list(categories))
 
 
 class CategoryViewTest(TestCase):
