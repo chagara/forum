@@ -39,10 +39,9 @@ class ForumStructureTest(FunctionalTest):
 
         categories_table = self.browser.find_element_by_id("categories")
 
-        # Sees Category1 and Category2 on the page
-        ## UPDATE THIS: This is wrong. Should not see Category2 here.
+        # Sees Category1 but not Category2 (it's in a different section)
         self.assertIn("Category1", categories_table.text)
-        self.assertIn("Category2", categories_table.text)
+        self.assertNotIn("Category2", categories_table.text)
 
         # Clicks Category1
         categories = categories_table.find_elements_by_class_name(
@@ -62,7 +61,7 @@ class ForumStructureTest(FunctionalTest):
 
         threads_table = self.browser.find_element_by_id("threads")
 
-        # Sees Thread1 but not Thread2 (because it's in a different section)
+        # Sees Thread1 but not Thread2 (because it's in a different category)
         self.assertIn("Thread1", threads_table.text)
         self.assertNotIn("Thread2", threads_table.text)
 
