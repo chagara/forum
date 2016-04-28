@@ -7,11 +7,11 @@
 
 {% block pagetitle %}{{ page_title }}{% endblock pagetitle %}
 {% block content %}
-    <table id="categories" class="table-bordered">
-        {% for category in categories %}
+    <table id="forum_children" class="table-bordered">
+        {% for forum_child in forum_children %}
             <tr><td class="category">
-                <a href="{% url 'forum:category_view' category_id=category.id %}">
-                {{ category.name }}</a>
+                <a href="{% url 'forum:category_view' category_id=forum_child.id %}">
+                {{ forum_child.name }}</a>
             </td></tr>
         {% endfor %}
     </table>

@@ -13,7 +13,8 @@ def section_view(request, section_id):
     context = {
         "section": section,
         "page_title": section.name,
-        "categories": Category.objects.filter(section__pk=section_id)
+        "categories": Category.objects.filter(section__pk=section_id),
+        "forum_children": Category.objects.filter(section__pk=section_id)
     }
     return render(request, 'forum/detail.html', context)
 

@@ -37,7 +37,7 @@ class ForumStructureTest(FunctionalTest):
             self.live_server_url + '/section/1/')
         self.assertEqual(self.browser.title, "Section1")
 
-        categories_table = self.browser.find_element_by_id("categories")
+        categories_table = self.browser.find_element_by_id("forum_children")
 
         # Sees Category1 but not Category2 (it's in a different section)
         self.assertIn("Category1", categories_table.text)
