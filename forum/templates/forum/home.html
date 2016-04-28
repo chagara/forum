@@ -10,7 +10,10 @@
     <h1>DjangoLearners</h1>
     <table id="sections" class="table-bordered">
         {% for section in sections %}
-            <tr><td class="section">{{ section.name }}</td></tr>
+            <tr><td class="section">
+                <a href="{% url 'forum:section_view' section_id=section.id %}">
+                {{ section.name }}</a>
+            </td></tr>
         {% endfor %}
     </table>
 {% endblock content %}

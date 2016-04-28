@@ -16,3 +16,12 @@ class HomeViewTest(TestCase):
 
         response_sections = response.context['sections']
         self.assertEqual(list(response_sections), list(sections))
+
+
+class SectionViewTest(TestCase):
+
+    def test_uses_section_template(self):
+        section = Section.objects.create(name="Section")
+        response = self.client.get('/section/%d/' % (section.id,))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'forum/section.html')
