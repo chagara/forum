@@ -1,5 +1,5 @@
 from django.test import TestCase
-from forum.models import Section, Category, Thread
+from forum.models import Section, Category, Thread, Comment
 
 
 class HomeViewTest(TestCase):
@@ -96,3 +96,11 @@ class ThreadViewTest(TestCase):
     def test_invalid_thread_id_raises_404(self):
         response = self.client.get('/thread/2398743/')
         self.assertEqual(response.status_code, 404)
+
+    def test_passes_comments_context_to_template(self):
+        thread = Thread.objects.get(name="Thread1")
+        comments = Comment.objects.filter(thread__pk=thread.id)
+        response = self.client.get('/thread/%d/' % (thread.id,))
+
+        response_comments = response.context['comments']
+        self.assertEqual(list(response_comments), list(comments))

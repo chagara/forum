@@ -6,3 +6,14 @@
 {% endblock styles %}
 
 {% block pagetitle %}{{ thread.name }}{% endblock pagetitle %}
+
+{% block content %}
+    <table id="comments" class="table-bordered">
+        {% for comment in comments %}
+            <tr><td class="comment">
+                <a href="">
+                {{ comment.name }}</a>
+            </td></tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

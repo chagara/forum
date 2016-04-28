@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Section, Category, Thread
+from .models import Section, Category, Thread, Comment
 
 
 def home(request):
@@ -26,6 +26,7 @@ def category_view(request, category_id):
 
 def thread_view(request, thread_id):
     context = {
-        "thread": get_object_or_404(Thread, pk=thread_id)
+        "thread": get_object_or_404(Thread, pk=thread_id),
+        "comments": Comment.objects.filter(thread__pk=thread_id)
     }
     return render(request, 'forum/thread.html', context)
