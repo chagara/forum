@@ -40,11 +40,12 @@ class SectionViewTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_passes_categories_context_to_template(self):
-        categories = Category.objects.all()
-        response = self.client.get('/section/1/')
-        # Need to changed the name of the response_sections variable
-        response_sections = response.context['categories']
-        self.assertEqual(list(response_sections), list(categories))
+        section = Section.objects.get(name="Section1")
+        categories = Category.objects.filter(section__pk=section.id)
+        response = self.client.get('/section/%d/' % (section.id))
+
+        response_categories = response.context['categories']
+        self.assertEqual(list(response_categories), list(categories))
 
 
 class CategoryViewTest(TestCase):

@@ -9,11 +9,9 @@ def home(request):
 
 
 def section_view(request, section_id):
-    # This gets all categories which is wrong. It should only get
-    # categories for that specific section
     context = {
         "section": get_object_or_404(Section, pk=section_id),
-        "categories": Category.objects.all()
+        "categories": Category.objects.filter(section__pk=section_id)
     }
     return render(request, 'forum/section.html', context)
 
