@@ -21,10 +21,10 @@ def section_view(request, section_id):
     return render(request, 'forum/detail.html', context)
 
 
-def category_view(request, category_id):
+def category_view(request, pk):
     context = {
-        "category": get_object_or_404(Category, pk=category_id),
-        "threads": Thread.objects.filter(category__pk=category_id)
+        "category": get_object_or_404(Category, pk=pk),
+        "threads": Thread.objects.filter(category__pk=pk)
     }
     return render(request, 'forum/category.html', context)
 
