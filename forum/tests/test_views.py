@@ -45,3 +45,14 @@ class SectionViewTest(TestCase):
 
         response_sections = response.context['categories']
         self.assertEqual(list(response_sections), list(categories))
+
+
+class CategoryViewTest(TestCase):
+
+    fixtures = ['test_forum_structure']
+
+    def test_uses_category_template(self):
+        category = Category.objects.first()
+        response = self.client.get('/category/%d/' % (category.id,))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'forum/category.html')

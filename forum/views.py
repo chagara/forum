@@ -14,3 +14,7 @@ def section_view(request, section_id):
         "categories": Category.objects.all()
     }
     return render(request, 'forum/section.html', context)
+
+
+def category_view(request, category_id):
+    return render(request, 'forum/category.html')
