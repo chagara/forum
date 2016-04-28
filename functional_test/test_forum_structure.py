@@ -39,7 +39,8 @@ class ForumStructureTest(FunctionalTest):
 
         categories_table = self.browser.find_element_by_id("categories")
 
-        # Sees Category1 and Category 2 on the page
+        # Sees Category1 and Category2 on the page
+        ## UPDATE THIS: This is wrong. Should not see Category2 here.
         self.assertIn("Category1", categories_table.text)
         self.assertIn("Category2", categories_table.text)
 
@@ -61,19 +62,19 @@ class ForumStructureTest(FunctionalTest):
 
         threads_table = self.browser.find_element_by_id("threads")
 
-        # Sees Thread1 and Thread2
+        # Sees Thread1 but not Thread2 (because it's in a different section)
         self.assertIn("Thread1", threads_table.text)
-        self.assertIn("Thread2", threads_table.text)
+        self.assertNotIn("Thread2", threads_table.text)
 
         # Clicks Thread1
         threads = threads_table.find_elements_by_class_name(
-            "Thread")
+            "thread")
         for Thread in threads:
             if Thread.text == "Thread1":
                 Thread.click()
                 break
         else:
-            self.fail("Category1 not found")
+            self.fail("Thread1 not found")
 
         # Is taken to a page which shows all of the comments in Thread1
         self.assertEqual(
