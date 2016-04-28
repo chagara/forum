@@ -83,6 +83,6 @@ class ForumStructureTest(FunctionalTest):
 
         comments_table = self.browser.find_element_by_id("comments")
 
-        # Sees Comment1 and Comment2
+        # Sees Comment1 but not Comment2 (because it's in a different thread)
         self.assertIn("Comment1", comments_table.text)
-        self.assertIn("Comment2", comments_table.text)
+        self.assertNotIn("Comment2", comments_table.text)
