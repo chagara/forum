@@ -18,7 +18,7 @@ def section_view(request, section_id):
         "forum_children": Category.objects.filter(section__pk=section_id),
         "child_url": "forum:category_view"
     }
-    return render(request, 'forum/detail.html', context)
+    return render(request, 'forum/overview.html', context)
 
 
 def category_view(request, pk):
