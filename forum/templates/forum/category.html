@@ -6,3 +6,14 @@
 {% endblock styles %}
 
 {% block pagetitle %}{{ category.name }}{% endblock pagetitle %}
+
+{% block content %}
+    <table id="threads" class="table-bordered">
+        {% for thread in threads %}
+            <tr><td class="thread">
+                <a href="">
+                {{ thread.name }}</a>
+            </td></tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

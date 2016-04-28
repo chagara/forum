@@ -1,5 +1,5 @@
 from django.test import TestCase
-from forum.models import Section, Category
+from forum.models import Section, Category, Thread
 
 
 class HomeViewTest(TestCase):
@@ -42,7 +42,7 @@ class SectionViewTest(TestCase):
     def test_passes_categories_context_to_template(self):
         categories = Category.objects.all()
         response = self.client.get('/section/1/')
-
+        # Need to changed the name of the response_sections variable
         response_sections = response.context['categories']
         self.assertEqual(list(response_sections), list(categories))
 
@@ -66,3 +66,11 @@ class CategoryViewTest(TestCase):
     def test_invalid_category_id_raises_404(self):
         response = self.client.get('/category/87ab3/')
         self.assertEqual(response.status_code, 404)
+
+    def test_passes_threads_context_to_template(self):
+        category = Category.objects.get(name="Category1")
+        threads = Thread.objects.filter(category__id=category.id)
+        response = self.client.get('/category/%d/' % (category.id,))
+
+        response_threads = response.context['threads']
+        self.assertEqual(list(response_threads), list(threads))

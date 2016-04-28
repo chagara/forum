@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Section, Category
+from .models import Section, Category, Thread
 
 
 def home(request):
@@ -9,6 +9,8 @@ def home(request):
 
 
 def section_view(request, section_id):
+    # This gets all categories which is wrong. It should only get
+    # categories for that specific section
     context = {
         "section": get_object_or_404(Section, pk=section_id),
         "categories": Category.objects.all()
@@ -18,6 +20,7 @@ def section_view(request, section_id):
 
 def category_view(request, category_id):
     context = {
-        "category": get_object_or_404(Category, pk=category_id)
+        "category": get_object_or_404(Category, pk=category_id),
+        "threads": Thread.objects.filter(category__pk=category_id)
     }
     return render(request, 'forum/category.html', context)
