@@ -22,6 +22,8 @@ class ForumStructureTest(FunctionalTest):
 
         # Clicks Section1
         sections = children_table.find_elements_by_class_name("section")
+        if len(sections) == 0:
+            self.fail("No sections found")
         for section in sections:
             if section.text == "Section1":
                 section.click()
