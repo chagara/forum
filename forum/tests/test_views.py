@@ -19,6 +19,10 @@ class HomeViewTest(TestCase):
         response = self.client.get('/')
         self.assertEqual("forum:section_view", response.context['child_url'])
 
+    def test_passes_child_class_to_template(self):
+        response = self.client.get('/')
+        self.assertEqual("section", response.context['child_class'])
+
     def test_passes_sections_to_template(self):
         sections = Section.objects.all()
         response = self.client.get('/')

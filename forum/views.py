@@ -6,6 +6,7 @@ def home(request):
     context = {
         "page_title": "DjangoLearners",
         "children": Section.objects.all(),
+        "child_class": "section",
         "child_url": "forum:section_view"
     }
     return render(request, 'forum/overview.html', context)
