@@ -15,11 +15,14 @@ class HomeViewTest(TestCase):
         response = self.client.get('/')
         self.assertEqual("DjangoLearners", response.context['page_title'])
 
-    def test_passes_sections_context_to_template(self):
+    def test_passes_child_url_to_template(self):
+        response = self.client.get('/')
+        self.assertEqual("forum:section_view", response.context['child_url'])
+
+    def test_passes_sections_to_template(self):
         sections = Section.objects.all()
         response = self.client.get('/')
-
-        response_sections = response.context['sections']
+        response_sections = response.context['children']
         self.assertEqual(list(response_sections), list(sections))
 
 

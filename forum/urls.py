@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
-    url(r'^section/(?P<section_id>\d+)/$',
+    url(r'^section/(?P<pk>\d+)/$',
         views.section_view, name="section_view"),
     url(r'^category/(?P<pk>\d+)/$',
         views.category_view, name="category_view"),

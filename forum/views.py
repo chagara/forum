@@ -3,20 +3,20 @@ from .models import Section, Category, Thread, Comment
 
 
 def home(request):
-    sections = Section.objects.all()
     context = {
-        'sections': sections,
         "page_title": "DjangoLearners",
+        "children": Section.objects.all(),
+        "child_url": "forum:section_view"
     }
     return render(request, 'forum/overview.html', context)
 
 
-def section_view(request, section_id):
-    section = get_object_or_404(Section, pk=section_id)
+def section_view(request, pk):
+    section = get_object_or_404(Section, pk=pk)
     context = {
         "page_title": section.name,
         "child_class": "category",
-        "children": Category.objects.filter(section__pk=section_id),
+        "children": Category.objects.filter(section__pk=pk),
         "child_url": "forum:category_view"
     }
     return render(request, 'forum/overview.html', context)
