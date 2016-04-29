@@ -4,8 +4,11 @@ from .models import Section, Category, Thread, Comment
 
 def home(request):
     sections = Section.objects.all()
-    context = {'sections': sections}
-    return render(request, 'forum/home.html', context)
+    context = {
+        'sections': sections,
+        "page_title": "DjangoLearners",
+    }
+    return render(request, 'forum/overview.html', context)
 
 
 def section_view(request, section_id):

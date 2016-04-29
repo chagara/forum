@@ -6,10 +6,14 @@ class HomeViewTest(TestCase):
 
     fixtures = ['test_forum_structure']
 
-    def test_uses_home_template(self):
+    def test_uses_overview_template(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'forum/home.html')
+        self.assertTemplateUsed(response, 'forum/overview.html')
+
+    def test_passes_page_title_to_template(self):
+        response = self.client.get('/')
+        self.assertEqual("DjangoLearners", response.context['page_title'])
 
     def test_passes_sections_context_to_template(self):
         sections = Section.objects.all()
