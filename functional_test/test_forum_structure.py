@@ -37,15 +37,17 @@ class ForumStructureTest(FunctionalTest):
             self.live_server_url + '/section/1/')
         self.assertEqual(self.browser.title, "Section1")
 
-        categories_table = self.browser.find_element_by_id("children")
+        children_table = self.browser.find_element_by_id("children")
 
         # Sees Category1 but not Category2 (it's in a different section)
-        self.assertIn("Category1", categories_table.text)
-        self.assertNotIn("Category2", categories_table.text)
+        self.assertIn("Category1", children_table.text)
+        self.assertNotIn("Category2", children_table.text)
 
         # Clicks Category1
-        categories = categories_table.find_elements_by_class_name(
+        categories = children_table.find_elements_by_class_name(
             "category")
+        if len(categories) == 0 :
+            self.fail("No categories found")
         for category in categories:
             if category.text == "Category1":
                 category.click()
@@ -59,15 +61,17 @@ class ForumStructureTest(FunctionalTest):
             self.live_server_url + '/category/1/')
         self.assertEqual(self.browser.title, "Category1")
 
-        threads_table = self.browser.find_element_by_id("threads")
+        children_table = self.browser.find_element_by_id("children")
 
         # Sees Thread1 but not Thread2 (because it's in a different category)
-        self.assertIn("Thread1", threads_table.text)
-        self.assertNotIn("Thread2", threads_table.text)
+        self.assertIn("Thread1", children_table.text)
+        self.assertNotIn("Thread2", children_table.text)
 
         # Clicks Thread1
-        threads = threads_table.find_elements_by_class_name(
+        threads = children_table.find_elements_by_class_name(
             "thread")
+        if len(threads) == 0:
+            self.fail("No threads found")
         for Thread in threads:
             if Thread.text == "Thread1":
                 Thread.click()
