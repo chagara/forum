@@ -24,16 +24,19 @@ def section_view(request, pk):
 
 
 def category_view(request, pk):
+    category = get_object_or_404(Category, pk=pk)
     context = {
-        "category": get_object_or_404(Category, pk=pk),
-        "threads": Thread.objects.filter(category__pk=pk)
+        "page_title": category.name,
+        "child_class": "thread",
+        "child_url": "forum:thread_view",
+        "children": Thread.objects.filter(category__pk=pk)
     }
-    return render(request, 'forum/category.html', context)
+    return render(request, 'forum/overview.html', context)
 
 
-def thread_view(request, thread_id):
+def thread_view(request, pk):
     context = {
-        "thread": get_object_or_404(Thread, pk=thread_id),
-        "comments": Comment.objects.filter(thread__pk=thread_id)
+        "thread": get_object_or_404(Thread, pk=pk),
+        "comments": Comment.objects.filter(thread__pk=pk)
     }
     return render(request, 'forum/thread.html', context)

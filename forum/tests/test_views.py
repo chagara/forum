@@ -76,28 +76,37 @@ class CategoryViewTest(TestCase):
 
     fixtures = ['test_forum_structure']
 
-    def test_uses_category_template(self):
+    def test_uses_overview_template(self):
         category = Category.objects.first()
         response = self.client.get('/category/%d/' % (category.id,))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'forum/category.html')
+        self.assertTemplateUsed(response, 'forum/overview.html')
 
-    def test_passes_category_context_to_template(self):
+    def test_passes_page_title_to_template(self):
         category = Category.objects.get(name="Category1")
         response = self.client.get('/category/%d/' % (category.id,))
-        self.assertIn('category', response.context)
-        self.assertEqual("Category1", response.context['category'].name)
+        self.assertEqual(category.name, response.context['page_title'])
+
+    def test_passes_child_url_to_template(self):
+        category = Category.objects.get(name="Category1")
+        response = self.client.get('/category/%d/' % (category.id,))
+        self.assertEqual("forum:thread_view", response.context['child_url'])
+
+    def test_passes_child_class_to_template(self):
+        category = Category.objects.get(name="Category1")
+        response = self.client.get('/category/%d/' % (category.id,))
+        self.assertEqual("thread", response.context['child_class'])
 
     def test_invalid_category_id_raises_404(self):
         response = self.client.get('/category/984357/')
         self.assertEqual(response.status_code, 404)
 
-    def test_passes_threads_context_to_template(self):
+    def test_passes_threads_to_template(self):
         category = Category.objects.get(name="Category1")
         threads = Thread.objects.filter(category__id=category.id)
         response = self.client.get('/category/%d/' % (category.id,))
 
-        response_threads = response.context['threads']
+        response_threads = response.context['children']
         self.assertEqual(list(response_threads), list(threads))
 
 
