@@ -10,20 +10,18 @@ class ForumStructureTest(FunctionalTest):
         self.browser.get(self.live_server_url)
         self.assertEqual(self.browser.current_url, self.live_server_url + '/')
 
-        # Sees DjangoLearners in the title and heading
+        # Sees DjangoLearners in the title
         self.assertEqual(self.browser.title, "DjangoLearners")
-        heading_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual(heading_text, "DjangoLearners")
 
         # There is a table of Sections on the page
-        sections_table = self.browser.find_element_by_id("sections")
+        children_table = self.browser.find_element_by_id("children")
 
         # Sees Section1 and Section2 in the table
-        self.assertIn("Section1", sections_table.text)
-        self.assertIn("Section2", sections_table.text)
+        self.assertIn("Section1", children_table.text)
+        self.assertIn("Section2", children_table.text)
 
         # Clicks Section1
-        sections = sections_table.find_elements_by_class_name("section")
+        sections = children_table.find_elements_by_class_name("section")
         for section in sections:
             if section.text == "Section1":
                 section.click()
