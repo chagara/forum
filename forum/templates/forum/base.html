@@ -5,18 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'jquery-ui/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    {% block styles %}{% endblock styles %}
     <script src="{% static 'jquery-ui/external/jquery/jquery.js' %}" defer></script>
     <script src="{% static 'jquery-ui/jquery-ui.min.js' %}" defer></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" defer></script>
     {% block scripts %}{% endblock scripts %}
-    <link rel="stylesheet" href="{% static 'jquery-ui/jquery-ui.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    {% block styles %}{% endblock styles %}
     <title>{% block pagetitle %}Forum{% endblock pagetitle %}</title>
 </head>
 <body>
-    <div class="container">
-        {% block content %}{% endblock content %}
-    </div>
+    <div class="container">{% block content %}{% endblock content %}</div>
 </body>
 </html>

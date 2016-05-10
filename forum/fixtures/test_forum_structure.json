@@ -1,0 +1,92 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "password",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user",
+    "first_name": "firstname",
+    "last_name": "lastname",
+    "email": "something@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-04-27T15:58:33.153Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "forum.section",
+  "pk": 1,
+  "fields": {
+    "name": "Section1"
+  }
+},
+{
+  "model": "forum.section",
+  "pk": 2,
+  "fields": {
+    "name": "Section2"
+  }
+},
+{
+  "model": "forum.category",
+  "pk": 1,
+  "fields": {
+    "name": "Category1",
+    "description": "The first category",
+    "section": 1
+  }
+},
+{
+  "model": "forum.category",
+  "pk": 2,
+  "fields": {
+    "name": "Category2",
+    "description": "The second category",
+    "section": 2
+  }
+},
+{
+  "model": "forum.thread",
+  "pk": 1,
+  "fields": {
+    "name": "Thread1",
+    "author": 1,
+    "datetime_posted": "2016-04-27T16:04:49.199Z",
+    "category": 1
+  }
+},
+{
+  "model": "forum.thread",
+  "pk": 2,
+  "fields": {
+    "name": "Thread2",
+    "author": 1,
+    "datetime_posted": "2016-04-27T16:04:49.672Z",
+    "category": 2
+  }
+},
+{
+  "model": "forum.comment",
+  "pk": 1,
+  "fields": {
+    "text": "Comment1",
+    "author": 1,
+    "datetime_posted": "2016-04-27T16:04:50.218Z",
+    "thread": 1
+  }
+},
+{
+  "model": "forum.comment",
+  "pk": 2,
+  "fields": {
+    "text": "Comment2",
+    "author": 1,
+    "datetime_posted": "2016-04-27T16:04:52.206Z",
+    "thread": 2
+  }
+}
+]

@@ -1,0 +1,18 @@
+{% extends 'forum/base.html' %}
+{% block scripts %}
+{% endblock scripts %}
+
+{% block styles %}
+{% endblock styles %}
+
+{% block pagetitle %}{{ page_title }}{% endblock pagetitle %}
+{% block content %}
+    <table id="children" class="table-bordered">
+        {% for child in children %}
+            <tr><td class="{{ child_class }}">
+                <a href="{% url child_url pk=child.id %}">
+                {{ child.name }}</a>
+            </td></tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
